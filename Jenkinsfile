@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'docker build -t Lukasjai/Masterarbeit_Springboot_Test .'
+        bat 'docker build -t Lukasjai/masterarbeit_springboot_test_jenkis .'
       }
     }
     stage('Login') {
@@ -23,7 +23,7 @@ pipeline {
     stage('Push to Heroku registry') {
       steps {
         bat '''
-          docker tag Lukasjai/Masterarbeit_Springboot_Test:latest registry.heroku.com/$APP_NAME/web
+          docker tag Lukasjai/masterarbeit_springboot_test_jenkis:latest registry.heroku.com/$APP_NAME/web
           docker push registry.heroku.com/$APP_NAME/web
         '''
       }
