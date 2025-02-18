@@ -15,20 +15,20 @@ pipeline {
         bat '''
               cd %WORKSPACE%
               dir
-              docker build -t Lukasjai/masterarbeit_springboot_test_jenkis .
+              docker build --no-cache -t Lukasjai/masterarbeit_springboot_test_jenkis .
             '''
       }
     }
     stage('Login') {
       steps {
-        bat 'echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com'
+        bat 'echo %HEROKU_API_KEY% | docker login --username=_ --password-stdin registry.heroku.com'
       }
     }
     stage('Push to Heroku registry') {
       steps {
         bat '''
-          docker tag Lukasjai/masterarbeit_springboot_test_jenkis:latest registry.heroku.com/$APP_NAME/web
-          docker push registry.heroku.com/$APP_NAME/web
+          docker tag Lukasjai/masterarbeit_springboot_test_jenkis:latest registry.heroku.com/%APP_NAME%/web
+          docker push registry.heroku.com/%APP_NAME%/web
         '''
       }
     }
