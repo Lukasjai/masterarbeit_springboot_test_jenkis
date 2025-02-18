@@ -12,7 +12,11 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'docker build -t Lukasjai/masterarbeit_springboot_test_jenkis .'
+        bat '''
+              cd %WORKSPACE%
+              dir
+              docker build -t Lukasjai/masterarbeit_springboot_test_jenkis .
+            '''
       }
     }
     stage('Login') {
