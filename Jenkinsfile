@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Login') {
       steps {
-        bat 'echo HRKU-65858afb-c4fc-4884-97e6-04c1d4adc2b3 | docker login --username=_ --password-stdin registry.heroku.com'
+        bat 'echo %HEROKU_API_KEY% | docker login --username=_ --password-stdin registry.heroku.com'
       }
     }
     stage('Push to Heroku registry') {
