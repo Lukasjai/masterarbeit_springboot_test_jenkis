@@ -15,11 +15,10 @@ pipeline {
   stage('Check Docker Access') {
               steps {
                   bat '''
-                       echo ===================================
-                                      echo   CHECKING DOCKER ACCESS
-                                      echo ===================================
-                                      docker --version
-                                      docker info
+                      type "!!!"
+                      echo Checking Docker access...
+                      docker --version
+                      docker info
                   '''
               }
           }
@@ -34,7 +33,7 @@ pipeline {
     }
     stage('Login') {
       steps {
-        bat 'echo %HEROKU_API_KEY% | docker login --username=_ --password-stdin registry.heroku.com'
+        echo HRKU-8c116d3d-bfa9-467b-8824-02cdd454990f | docker login --username=_ --password-stdin registry.heroku.com'
       }
     }
     stage('Push to Heroku registry') {
