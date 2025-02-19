@@ -23,6 +23,7 @@ pipeline {
       steps {
         bat '''
         echo %HEROKU_API_KEY% > heroku_key.txt
+        type heroku_key.txt
         docker login --username=_ --password-stdin registry.heroku.com < heroku_key.txt
         del heroku_key.txt
         '''
