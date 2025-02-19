@@ -15,6 +15,7 @@ pipeline {
   stage('Check Docker Access') {
               steps {
                   bat '''
+                      type "!!!"
                       echo Checking Docker access...
                       docker --version
                       docker info
