@@ -9,8 +9,10 @@ pipeline {
   parameters {
     string(name: 'APP_NAME', defaultValue: 'java-web-app-jenkins-09059', description: 'What is the Heroku app name?')
   }
+
+
   stages {
-          stage('Check Docker Access') {
+  stage('Check Docker Access') {
               steps {
                   bat '''
                       echo Checking Docker access...
@@ -19,8 +21,6 @@ pipeline {
                   '''
               }
           }
-   }
-  stages {
     stage('Build') {
       steps {
         bat '''
