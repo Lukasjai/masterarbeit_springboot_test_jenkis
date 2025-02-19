@@ -4,7 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   environment {
-    HEROKU_API_KEY = credentials('lukasjai-heroku-key')
+    HEROKU_API_KEY = credentials('LukasjaiHerokuKey')
   }
   parameters {
     string(name: 'APP_NAME', defaultValue: '', description: 'What is the Heroku app name?')
@@ -21,19 +21,8 @@ pipeline {
     }
     stage('Login') {
       steps {
-
-                        script {
-                            withCredentials([string(credentialsId: 'Lukasjai-heroku-api-key', variable: 'HEROKU_API_KEY')]) {
-                                bat '''
-                                echo %HEROKU_API_KEY% > heroku_key.txt
-                                type heroku_key.txt
-                                docker login --username=_ --password-stdin registry.heroku.com < heroku_key.txt
-                                del heroku_key.txt
-                                '''
-                            }
-                        }
-
-
+        bat 'echo %HEROKU_API_KEY% | docker login --username=_ --password-stdin registry.heroku.com'
+      }
     }
     stage('Push to Heroku registry') {
       steps {
