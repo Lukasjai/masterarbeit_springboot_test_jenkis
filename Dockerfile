@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-slim as build
+FROM mcr.microsoft.com/openjdk/jdk:11-windowsservercore-ltsc2022 AS build
 WORKDIR /workspace/app
 
 COPY mvnw .
@@ -15,4 +15,5 @@ ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+ENV PORT=9091
 ENTRYPOINT ["java","-Dserver.port=${PORT}","-cp","app:app/lib/*","com.example.demo.DemoApplication"]
