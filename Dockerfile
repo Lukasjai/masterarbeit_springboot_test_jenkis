@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/openjdk/jdk:11-windowsservercore-ltsc2022 AS build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /workspace/app
 
 COPY mvnw .
